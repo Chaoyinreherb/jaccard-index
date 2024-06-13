@@ -6,7 +6,7 @@
 * 1つ1つの単語が半角スペースで区切られている
 * 1つ1つの単語のリスト同士の間が一行空いている
 <br>
-example:
+例:
 
 >
 > int main ( int argc , char \*argv[] )
@@ -16,5 +16,5 @@ example:
 > public static void main ( String[] args )
 >
 
-## References:
+## 参考文献:
 * https://mieruca-ai.com/ai/jaccar\_dice\_simpson/
