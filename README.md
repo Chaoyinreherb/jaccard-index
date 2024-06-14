@@ -1,8 +1,8 @@
-# 単語によるjaccard係数を求めるpythonコード
+## 単語によるjaccard係数を求めるpythonコード
 ---
 条件に沿ったテキストファイルを読み込んで、リストとリストのjaccard係数を求めるかんたんなプログラムです。
 
-## 係数を求めるためのtxtファイルの条件:
+### 係数を求めるためのtxtファイルの条件:
 * 1つ1つの単語が半角スペースで区切られている
 * 1つ1つの単語のリスト同士の間が一行空いている
 <br>
@@ -16,5 +16,5 @@
 > public static void main ( String[] args )
 >
 
-## 参考文献:
+### 参考文献:
 * https://mieruca-ai.com/ai/jaccar\_dice\_simpson/
