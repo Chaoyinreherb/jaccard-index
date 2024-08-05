@@ -1,10 +1,9 @@
 import os
 import sys
-import tkinter.filedialog
 
 j_list = []
 
-def read(r): #ファイルの内容を取り込む
+def read(r, code): #ファイルの内容を取り込む　ファイルパス、文字コード
     if os.path.isfile(r):
         print("ファイルを確認しました。\n")
     else:
@@ -16,12 +15,13 @@ def read(r): #ファイルの内容を取り込む
     k = 0
     print("データ一覧:")
     list = f.readline()
+    j_list = []
 
     while list:
         if '\n' in list[0]:
             print("改行")
         else:
-            k = k + 1
+            k += 1
 
             if '\n' in list:
                 print("改行あり〼。")
@@ -35,8 +35,9 @@ def read(r): #ファイルの内容を取り込む
 
     f.close()
     j_list.reverse()
+    return j_list
 
-def jaccard_sim_coef(): #jaccard係数を計算
+def jaccard_sim_coef(j_list): #jaccard係数を計算
     datas = len(j_list) - 1
     c = 0
     print("\n")
@@ -60,31 +61,30 @@ def jaccard_sim_coef(): #jaccard係数を計算
             except ZeroDivisionError:
                 print(la + "と" + lb + "のjaccard係数は" , 1.0 , "です。\n")
 
-            e = e + 1
-        c = c + 1
+            e += 1
+        c += 1
 
-print("2024/2/1")
-while True:
-    print("※実行時に'UnicodeDecodeError'が出る場合はここに文字コードを入力し、指定してください。")
-    code = input("※実行時に'UnicodeDecodeError'が出る場合はここに文字コードを入力し、指定してください。そのまま(utf-8で良い場合はそのままEnterを押してください。)") #もしEnterなら\nが入力される
-    print("条件: 1 一つひとつの単語のデータは半角スペース(全角でもおそらく問題ない)で区切られている")
-    print("　　　2 データ列の区切りで一行開けている")
-    print("比較するデータが書かれた、上の条件にあうテキストファイルを選択してください。")
+def main():
+    print("2024/2/1")
+    while True:
+        code = input("※実行時に'UnicodeDecodeError'が出る場合はここに文字コードを入力し、指定してください。そのまま(utf-8で良い場合はそのままEnterを押してください。)>>") #もしEnterなら\nが入力される
+        print("比較するデータが書かれたテキストファイルを選択してください。条件はREADME.mdを参照してください")
 
-    t = tkinter.filedialog.askopenfilename(filetypes=[("txt file", "*.txt")]) #エクスプローラーを開く
+        t = input("ファイルのパスを入力してください>>")
 
-    if not code:
-        print("文字コード:デフォルト")
-        code = "utf-8"
-    else:
-        print("文字コード:" + code)
+        if not code:
+            print("文字コード:デフォルト")
+            code = "utf-8"
+        else:
+            print("文字コード:" + code)
 
-    if read(t) == -1:
-        sys.exit()
-    jaccard_sim_coef()
+        if (j_list := read(t, code)) == -1:
+            sys.exit()
+        else:
+            jaccard_sim_coef(j_list)
     
-    t = input("続けて行う場合は'y'、この画面を閉じる場合は'n'を入力してください。≫")
-    if t == "n":
-        sys.exit()
+        t = input("続けて行う場合は'y'、終了する場合は'n'を入力してください。≫")
+        if t == "n":
+            sys.exit()
 
-    j_list.clear()
+main()
